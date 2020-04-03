@@ -6,13 +6,18 @@
   <meta name="keywords" content="javascript, network, radio, wirebird">
   <meta name="author" content="Zoltan Kristof Kerezsi">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e54b4b" />
   <link rel="icon" href="radio.ico">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Limelight&display=swap" rel="stylesheet">
   <title>Wirebird Network Radio</title>
 
   <style>
-    h1 {
+    h1, p {
       text-align:center;
+      font-family: 'Limelight', cursive;
+    }
+    p {
+      font-size: larger;
     }
     body {
       font-family: 'Open Sans', sans-serif;
@@ -23,9 +28,10 @@
       width: 750px;
     }
     #button {
+      font-weight: bold;
       padding: 15px;
       border-radius: 30px;
-      background-color: #0084ff;
+      background-color: #e54b4b;
       color: white;
       outline: none;
       border: none;
@@ -47,6 +53,7 @@
 
 <div id="window">
   <h1>Wirebird Network Radio</h1>
+  <p>Authentic music from the 1920s, '30s & '40s. Tune in & enjoy!</p>
   <div id="container">
     <button id="button" onclick="playAudio()">Load music</button>
     <audio id="audio" controls autoplay>
@@ -66,10 +73,10 @@
     } else {
       buttonPressed = true;
     }
-    fetch('http://wirebird.dynu.net/getNext', {method: 'POST'})
+    fetch('http://192.168.1.69/getNext', {method: 'POST'})
     .then(response => response.json())
     .then(randomMusic => {
-      source.src = `http://wirebird.dynu.net/music/${randomMusic}`;
+      source.src = `http://192.168.1.69/music/${randomMusic}`;
       audio.load();
       audio.addEventListener('ended', listener = () => {
         playAudio();
