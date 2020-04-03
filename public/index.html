@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Simple non-broadcasting network radio using express.js">
+  <meta name="keywords" content="javascript, network, radio, wirebird">
+  <meta name="author" content="Zoltan Kristof Kerezsi">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="radio.ico">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Wirebird Network Radio</title>
+
+  <style>
+    h1 {
+      text-align:center;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+    #window {
+      width: 750px;
+    }
+    #button {
+      padding: 15px;
+      border-radius: 30px;
+      background-color: #0084ff;
+      color: white;
+      outline: none;
+      border: none;
+      margin-right: 5px;
+      white-space:nowrap;
+    }
+    #container {
+      padding: 5px;
+      display: flex;
+    }
+    audio {
+      width: 100%;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="window">
+  <h1>Wirebird Network Radio</h1>
+  <div id="container">
+    <button id="button" onclick="playAudio()">Load music</button>
+    <audio id="audio" controls autoplay>
+      <source id="source" type="audio/mpeg">
+    </audio>
+  </div>
+</div>
+
+<script>
+  const audio = document.getElementById('audio');
+  const source = document.getElementById('source');
+  let buttonPressed = false;
+
+  function playAudio() {
+    if(buttonPressed) {
+      audio.removeEventListener('ended', listener);
+    } else {
+      buttonPressed = true;
+    }
+    fetch('http://wirebird.dynu.net/getNext', {method: 'POST'})
+    .then(response => response.json())
+    .then(randomMusic => {
+      source.src = `http://wirebird.dynu.net/music/${randomMusic}`;
+      audio.load();
+      audio.addEventListener('ended', listener = () => {
+        playAudio();
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
