@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Limelight&display=swap");
+
+h1, p {
+    text-align:center;
+    font-family: 'Limelight', cursive;
+  }
+  p {
+    font-size: larger;
+  }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+  #window {
+    width: 750px;
+  }
+  #button {
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 30px;
+    background-color: #e54b4b;
+    color: white;
+    outline: none;
+    border: none;
+    margin-right: 5px;
+    white-space:nowrap;
+  }
+  #container {
+    padding: 5px;
+    display: flex;
+  }
+  audio {
+    width: 100%;
+    outline: none;
+  }
