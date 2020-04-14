@@ -36,7 +36,7 @@ class MusicList {
         if(this.current != this.array.length - 1) {
             this.current++;
         } else {
-            this.hasEnded = true;
+            this.ended = true;
         }
     }
 }

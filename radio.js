@@ -13,20 +13,26 @@ radio.use(cors());
 
 let list = new MusicList();
 
-/*const playingCycle = () => {
+let duration;
+
+const playingCycle = async () => {
     if(list.hasEnded()) {
         list.setArray(fs.readdirSync(__dirname + '/public/music'));
         console.log(list.getArray());
     }
-    mp3Duration(`public/music/${list.getCurrent()}`, (err, duration) => {
-        console.log('Music: ' + list.getCurrent() + '\tDuration: ' + duration + ' seconds');
-        setTimeout(() => list.step(), duration * 1000);
-    });
-}*/
+    duration = await mp3Duration(`public/music/${list.getCurrent()}`);
+    console.log('Music: ' + list.getCurrent() + ' Duration: ' + duration + ' seconds');
+    setTimeout(() => {
+        list.step();
+        playingCycle(true);
+    }, duration * 1000);
+}
+
+playingCycle(false)
 
 radio.post('/getCurrent', (req, res) => {
     res.json(list.getCurrent());
-    console.log("Current music: " + list.getCurrent());
+    //console.log("Current music: " + list.getCurrent());
 });
 
 radio.get('/', (req, res) => {
