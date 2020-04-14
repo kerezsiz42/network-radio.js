@@ -43,6 +43,6 @@ radio.get('/music/:fileName', (req, res) => {
     res.sendFile(`/public/music/${req.params.fileName}`, {root: __dirname});
 });
 
-radio.listen(80, () => {
-    console.log(`Server is running on port 80.`);
+radio.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT} in ${process.env.NODE_ENV} mode.`);
 });

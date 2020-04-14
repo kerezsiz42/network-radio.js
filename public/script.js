@@ -8,10 +8,10 @@ function playAudio() {
     } else {
         buttonPressed = true;
     }
-    fetch('http://192.168.1.66/getCurrent', {method: "POST"})
+    fetch('http://wirebirds.club/getCurrent', {method: "POST"})
     .then(response => response.json())
     .then(randomMusic => {
-        source.src = `http://192.168.1.66/music/${randomMusic}`;
+        source.src = `http://wirebirds.club/music/${randomMusic}`;
         audio.load();
         audio.addEventListener('ended', listener = () => {
             playAudio();
