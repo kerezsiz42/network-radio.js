@@ -24,11 +24,11 @@ const playingCycle = async () => {
     console.log('Music: ' + list.getCurrent() + ' Duration: ' + duration + ' seconds');
     setTimeout(() => {
         list.step();
-        playingCycle(true);
+        playingCycle();
     }, duration * 1000);
 }
 
-playingCycle(false)
+playingCycle();
 
 radio.post('/getCurrent', (req, res) => {
     res.json(list.getCurrent());
