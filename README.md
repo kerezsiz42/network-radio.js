@@ -39,6 +39,7 @@ function playAudio() {
 There is a function with similar structure on the Server-side:
 
 ```js
+//radio.js
 const playingCycle = async () => {
     if(list.hasEnded()) {
         list.setArray(fs.readdirSync(__dirname + '/public/music'));
